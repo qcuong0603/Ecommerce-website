@@ -28,9 +28,9 @@ export const Navbar = () => {
         <img className='nav-dropdown' onClick={dropdown_toggle} src={nav_dropdown} alt="" />
         <ul ref={menuRef} className='nav-menu'>
         <li onClick={()=>{setMenu("shop")}}><Link style={{textDecoration:'none'}} to='/'>Shop</Link>{menu==="shop"?<hr/>:<></> }</li>
-            <li onClick={()=>{setMenu("mens")}}><Link style={{textDecoration:'none'}} to='/mens'>Mens</Link>{menu==="mens"?<hr/>:<></> }</li>
-            <li onClick={()=>{setMenu("womens")}}><Link style={{textDecoration:'none'}} to='/womens'>Womens</Link>{menu==="womens"?<hr/>:<></> }</li>
-            <li onClick={()=>{setMenu("kids")}}><Link style={{textDecoration:'none'}} to='/kids'>Kids</Link>{menu==="kids"?<hr/>:<></> }</li>
+            <li onClick={()=>{setMenu("Men")}}><Link style={{textDecoration:'none'}} to='/Men'>Men</Link>{menu==="Men"?<hr/>:<></> }</li>
+            <li onClick={()=>{setMenu("Women")}}><Link style={{textDecoration:'none'}} to='/Women'>Women</Link>{menu==="Women"?<hr/>:<></> }</li>
+            <li onClick={()=>{setMenu("Kid")}}><Link style={{textDecoration:'none'}} to='/Kid'>Kid</Link>{menu==="Kid"?<hr/>:<></> }</li>
         </ul>
         <div className='nav-login-cart'>
             <Link to='/login'><button>Login</button></Link>
