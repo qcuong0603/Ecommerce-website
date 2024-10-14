@@ -3,11 +3,12 @@ import { useGet } from "../../hook/hook";
 import TableComponent from "../Table"; 
 import { Spin, Alert } from 'antd'; 
 import { Link,useNavigate } from 'react-router-dom';
-import { Button, Typography, Modal, Input, InputNumber, Form, Popconfirm, Space, DatePicker } from "antd"
+import { Button, Typography, Input, InputNumber, Form, Popconfirm, Space, DatePicker } from "antd"
+import Modal from "../Modal"
 import {EditOutlined,PlusOutlined,DeleteOutlined,InfoCircleOutlined } from '@ant-design/icons';
 const ProductAdmin = () => {
   const { data: products, error: productError, loading: productLoading } = useGet("http://localhost:4000/productList/products");
-
+  const [open, setOpen] = useState(false)
   if (productLoading ) {
     return <Spin size="large" style={{ display: "block", margin: "auto" }} />;
   }
@@ -65,12 +66,30 @@ const ProductAdmin = () => {
     <div className='h-full'>
     <div className='flex justify-end max-w-full items-center p-[10px]'>
       <Link to="">
-        <Button
-         color="danger"
-          icon={<PlusOutlined />}
-          variant='solid'>
-        Add Product
-        </Button>
+      <button className="btn btn-danger" onClick={() => setOpen(true)}>
+       Delete
+      </button>
+
+      <Modal open={open} onClose={() => setOpen(false)}>
+        <div className="text-center w-56">
+      
+          <div className="mx-auto my-4 w-48">
+            <h3 className="text-lg font-black text-green-800">Create Product</h3>
+            <p className="text-sm text-gray-500">
+              Are you sure you want to delete this item?
+            </p>
+          </div>
+          <div className="flex gap-4">
+            <button className="btn btn-danger w-full">Delete</button>
+            <button
+              className="btn btn-light w-full"
+              onClick={() => setOpen(false)}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </Modal>
       </Link>
     </div>
     <TableComponent columns={columns} data={formattedData} />

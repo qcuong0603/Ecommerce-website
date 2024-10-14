@@ -3,23 +3,15 @@ const express = require("express");
 const ListRouter = express.Router();
 
 
-ListRouter.get('/addproduct', async (req, res) => {
-    const product = new Product({
-        id: req.body.id,
-        name: req.body.name,
-        image: req.body.image,
-        category: req.body.category,
-        new_price: req.body.new_price,
-        old_price: req.body.old_price,
-    });
-    console.log(product);
-    await product.save();
-    console.log("Saved");
-    res.json({
-        success: true,
-        name: req.body.name,
-    });
-});
+ListRouter.post('/createProduct', async (req, res) => {
+    try {
+      const newProduct = new DB.Product(req.body);
+      await newProduct.save();
+      res.status(201).json({ status: 'OK', message: 'Product Created Successfully', product: newProduct });
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
+  });
 
 
 ListRouter.get('/products', async (req, res) => {
@@ -30,15 +22,13 @@ ListRouter.get('/products', async (req, res) => {
         res.status(500).json({ message: e.message });
     }
 });
-
-ListRouter.get('/products/:_id', async (req, res) => {
+ListRouter.get('/products/:id', async (req, res) => {
     try {
-        const products = await DB.Product.findById(req.params._id);
-        if(!products)
-        {
+        const product = await DB.Product.find({ id: req.params.id });
+        if (!product) {
             return res.status(404).json({ message: "Product not found" });
         }
-        res.status(200).json(products);
+        res.status(200).json(product);
     } catch (e) {
         res.status(500).json({ message: e.message });
     }

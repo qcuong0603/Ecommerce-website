@@ -13,10 +13,14 @@
 }
 .producdisplay-img-list img{
     height: 163px;
+    width:300px;
 }
 .productdisplay-main-img{
-    width: 586px;
-    height: 700px;
+    width: 1000px;
+    height: 500px;
+    border-left:0.5px solid;
+    justify-content:center;
+    margin-top:70px;
 }
 .productdisplay-right{
     margin: 0px 70px;
@@ -83,6 +87,7 @@
 }
 .productdisplay-right-category{
     margin-top: 10px;
+    display:flex;
 }
 .productdisplay-right-category span{
     font-weight: 600;
